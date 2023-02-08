@@ -1,0 +1,26 @@
+import requests
+
+# URL to receive the webhook
+webhook_url = "https://jsonplaceholder.typicode.com/posts"
+
+# Data to send in the webhook
+data = {
+    "signal": "buy",
+    "symbol": "EURUSD",
+    "timestamp": "2022-12-31T23:59:59Z"
+}
+
+# Specify the content type as JSON
+headers = {
+    "Content-Type": "application/json"
+}
+
+# Send the webhook
+response = requests.post(webhook_url, json=data, headers=headers)
+
+# Check the response status code
+if response.status_code != 201:
+    raise Exception("Failed to send webhook: " + response.text)
+
+# Output the response text
+print(response.text)
